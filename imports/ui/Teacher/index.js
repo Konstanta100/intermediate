@@ -24,8 +24,14 @@ class Teacher extends Component {
     render(){
       return(
         <div className="leftsider">
-          <div className="Avatar">
-
+          <div className="avatar">
+            <img src="../lib/images/avatar.png"/>
+            <div className="teachername">
+                TeacherName
+            </div>
+          </div>
+          <div className="schedule">
+            <button className="schedulebutton">Schedule</button>
           </div>
           <div className="studentslist">
             <ol>
