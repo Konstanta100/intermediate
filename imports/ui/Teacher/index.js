@@ -23,22 +23,31 @@ class Teacher extends Component {
 
     render(){
       return(
-        <div className="leftsider">
-          <div className="avatar">
-            <img src="../lib/images/avatar.png"/>
-            <div className="teachername">
+          <div>
+            <div className="leftsider">
+              <div className="profile">
+                <img src="/images/avatar.png" alt="profile"/>
                 TeacherName
+              </div>
+              <div className="schedule">
+                <button className="schedulebutton">Schedule</button>
+              </div>
+              <div className="studentslist">
+                <ol>
+                  {this.renderStudents()}
+                </ol>
+              </div>
+            </div>
+            <div className="topclock">
+                topclock
+            </div>
+            <div className="table">
+                Table
+            </div>
+            <div className="rightsider ">
+              menu with pictures
             </div>
           </div>
-          <div className="schedule">
-            <button className="schedulebutton">Schedule</button>
-          </div>
-          <div className="studentslist">
-            <ol>
-              {this.renderStudents()}
-            </ol>
-          </div>
-        </div>
       );
     }
 }
