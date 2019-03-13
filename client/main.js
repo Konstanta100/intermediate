@@ -1,9 +1,14 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { render } from 'react-dom';
 
+import { mount } from 'react-mounter';
+
+import {MainLayout} from "./layouts/MainLayout.js";
 import App from '../imports/ui/App.js';
 
-Meteor.startup(() => {
-  render(<App />, document.getElementById('render-target'));
+FlowRouter.route('/', {
+  action(){
+    mount(MainLayout, {
+      content: (<App />)
+    })
+  }
 });
