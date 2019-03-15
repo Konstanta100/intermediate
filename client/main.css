@@ -79,9 +79,15 @@ app {
   font-size: 14px;
 }
 
+.new-student {
+  margin-left: 120px;
+  margin-bottom: 40px;
+}
+
 .profile {
   height: 100px;
 }
+
 header {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
@@ -144,7 +150,7 @@ li {
   height: 70px;
 }
 
-li .text {
+li .name {
   margin-left: 2px;
 }
 
@@ -152,7 +158,7 @@ li.checked {
   color: #888;
 }
 
-li.checked .text {
+li.checked .name {
   text-decoration: line-through;
 }
 
@@ -187,3 +193,4 @@ header .hide-completed {
 .avatar {
   width: 100px;
 }
+

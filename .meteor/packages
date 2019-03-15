@@ -21,7 +21,7 @@ insecure
 fortawesome:fontawesome
 spiderable
 fastclick
-aldeed:collection2
+
 aldeed:autoform
 accounts-ui
 accounts-password
@@ -31,3 +31,4 @@ simple:json-routes
 react-meteor-data
 kadira:flow-router
 meteortoys:allthings
+aldeed:collection2@3.0.0
