@@ -4,9 +4,9 @@ import SimpleSchema from 'simpl-schema';
 
 export const Tasks = new Mongo.Collection('tasks');
 
-const Schemas ={};
 
-Schemas.Task= new SimpleSchema({
+
+const TaskSchema= new SimpleSchema({
   firstname:{
     type: String,
     label: "Name"
@@ -20,7 +20,7 @@ Schemas.Task= new SimpleSchema({
   }
 });
 
-Tasks.attachSchema(Schemas.Task);
+Tasks.attachSchema(TaskSchema);
 
 if (Meteor.isServer) {
   Meteor.publish('tasks', function tasksPublication() {

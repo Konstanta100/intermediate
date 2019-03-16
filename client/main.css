@@ -34,11 +34,11 @@ body {
   padding: 20px 15px 15px 15px;
 }
 
-.topclock{
+.Time{
   position: fixed;
   background: dodgerblue;
   margin-left: 20%;
-  margin-bottom: 93%;
+  margin-bottom: 95%;
   min-width: 60%;
   min-height: 7%;
   padding:  20px 100px 15px 100px;
@@ -46,21 +46,30 @@ body {
 
 }
 
-.table {
+a .Edit {
   position: fixed;
-  background: white;
+  margin-left: 50px ;
+}
+
+.ScheduleTable {
+  position: fixed;
+  background: #B1C8FD;
   margin-left: 20%;
-  margin-top: 7%;
-  max-width: 60%;
+  margin-top: 5%;
+  min-width: 60%;
   min-height: 1000px;
   padding: 20px 15px 15px 15px;
+
 }
 
 
-.schedule {
+.ScheduleEdit {
   font-size: 16px;
   width: 100%;
   height: 50px;
+  background: #036dff;
+  color: white;
+  padding: 10px 30px 10px 30px;
 }
 
 .schedulebutton {
@@ -146,7 +155,7 @@ li {
   position: relative;
   list-style: none;
   padding: 30px;
-  border-bottom: #eee solid 1px;
+  border-bottom: grey solid 1px;
   height: 70px;
 }
 
@@ -158,7 +167,7 @@ li.checked {
   color: #888;
 }
 
-li.checked .name {
+li.checked  {
   text-decoration: line-through;
 }
 

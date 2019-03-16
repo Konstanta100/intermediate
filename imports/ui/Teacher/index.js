@@ -6,13 +6,25 @@ import { Students } from '../../api/students.js';
 
 import Student from '../Student/index.js';
 
+import ScheduleEdit from './ScheduleEdit.js';
+import ScheduleTable from './ScheduleTable.js';
+import Time from '../Time/index.js';
+
+
 import AccountsUIWrapper from './../AccountsUIWrapper.js';
 
 class Teacher extends Component {
 
     constructor(props) {
         super(props);
-        this.state={rightBoard: false };
+        this.state={defaultshedule: "Массив наших Тасков и BoxTasks" +
+                "посмотри React с состояниями" };
+    };
+
+    handleClick() {
+        this.setState( defaultshedule:{
+
+        })
     };
 
     renderStudents() {
@@ -24,12 +36,12 @@ class Teacher extends Component {
     addStudent(event) {
       event.preventDefault();
       const firstname = ReactDOM.findDOMNode(this.refs.firstname).value.trim();
-      const lastname = ReactDOM.findDOMNode(this.refs.lastname).value.trim();
-      if (firstname !== '' && lastname !== '' ){
-          Meteor.call('insertNewStudent', firstname, lastname, (err, res)=>{
+      const number = ReactDOM.findDOMNode(this.refs.number).value.trim();
+      if (firstname !== '' && number !== '' ){
+          Meteor.call('insertNewStudent', firstname, number, (err, res)=>{
               if(!err){
                   ReactDOM.findDOMNode(this.refs.firstname).value="";
-                  ReactDOM.findDOMNode(this.refs.lastname).value="";
+                  ReactDOM.findDOMNode(this.refs.number).value="";
               }
           });
       }
@@ -53,14 +65,12 @@ class Teacher extends Component {
                           placeholder ="Firstname's child" />
                       <input
                           type="text"
-                          ref="lastname"
-                          placeholder ="Lastname's child" />
+                          ref="number"
+                          placeholder ="+7 *** *** **" />
                     <button type="submit">Add your child</button>
                 </form>
               </div>
-              <div className="schedule">
-                <button className="schedulebutton">Schedule</button>
-              </div>
+              <ScheduleEdit onClick={this.handleClick} />
               <div className="studentslist">
                 <ol>
                   {this.renderStudents()}
@@ -68,12 +78,8 @@ class Teacher extends Component {
               </div>
 
             </div>
-            <div className="topclock">
-                topclock
-            </div>
-            <div className="table">
-                Table
-            </div>
+            <Time />
+            <ScheduleTable />
             <div className="rightsider ">
                 menu with pictures
             </div>

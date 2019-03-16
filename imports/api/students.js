@@ -14,7 +14,7 @@ const StudentSchema = new SimpleSchema({
   'name.firstname': {
     type: String
   },
-  'name.lastname': {
+  'name.number': {
     type: String
   },
 
@@ -41,13 +41,13 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods({
-    insertNewStudent(firstname, lastname){
+    insertNewStudent(firstname, number){
       check(firstname, String);
-      check(lastname, String);
+      check(number, String);
       Students.insert({
         name: {
           firstname: firstname,
-          lastname: lastname,
+          number: number,
         },
       });
     },
