@@ -5,50 +5,43 @@ import { check } from 'meteor/check';
 
 export const Students = new Mongo.Collection('students');
 
+Students.schema = new SimpleSchema({
 
-const StudentSchema = new SimpleSchema({
-
-  name: {
-    type: Object
-  },
-  'name.firstname': {
-    type: String
-  },
-  'name.number': {
-    type: String
-  },
-
-  parent:{
+  _id:{
     type: String,
-    autoValue: function() {
-      return this.userId
-    },
+    regEx: SimpleSchema.RegEx.Id
   },
+  teacherId:{
+    type: String,
+    regEx: SimpleSchema.RegEx.Id
+  },
+  nameteacher:{type: String},
+  firstname: {type: String},
+  number: {type: String},
   createdAt:{
     type: Date,
     autoValue: function() {
       return new Date()
     },
-
   }
 });
 
-Students.attachSchema(StudentSchema);
+Students.attachSchema(Students.schema);
 
 if (Meteor.isServer) {
   Meteor.publish('students', function studentsPublication() {
-    return Students.find();
+    return Students.find({ });
   });
 
-  Meteor.methods({
+Meteor.methods({
     insertNewStudent(firstname, number){
       check(firstname, String);
       check(number, String);
       Students.insert({
-        name: {
-          firstname: firstname,
-          number: number,
-        },
+        firstname: firstname,
+        number: number,
+        teacherId: Meteor.userId(),
+        nameteacher: Meteor.user().username
       });
     },
   })

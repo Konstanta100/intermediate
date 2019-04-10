@@ -1,6 +1,4 @@
-const ROLES = {
+export default {
   TEACHER: 'TEACHER',
   PARENT: 'PARENT',
 };
-
-export default ROLES;
