@@ -6,8 +6,6 @@ import { Meteor } from 'meteor/meteor';
 import { Students } from '../../api/students.js';
 import Student from '../Student/index.js';
 import ScheduleTable from '../ScheduleTable/index.js';
-import Time from '../Time/index.js';
-import RightSider from './RightSider.js';
 import AccountsUIWrapper from '../AccountsUIWrapper.js';
 
 
@@ -17,25 +15,81 @@ class Teacher extends Component {
       super(props);
       this.state= {
           owner: null,
-          week: ['1', '2', '3', '4', '5', '6', '7', '8','9','10'], 
-          now: 0
+          time: ['1','2','3','4','5','6','7','8','9','10'], 
+          nowteacher: 0,
+          nowstudent: null,
+          studentId: null
       };
       this.studentClick = this.studentClick.bind(this);
-      this.scheduleClick = this.scheduleClick.bind(this)
+      this.addStudent = this.addStudent.bind(this);
+      this.scheduleClick = this.scheduleClick.bind(this);
+      this.LeftWeekClick = this.LeftWeekClick.bind(this);
+      this.RightWeekClick = this.RightWeekClick.bind(this);
     }
 
-    studentClick (value) {
-      const studentId = value;
+
+
+    LeftWeekClick () {
+      const now = this.state.nowstudent
+      const studentId = this.state.studentId;
+      if (studentId === null){
+        const nowteacher = this.state.nowteacher-1;
+        if (nowteacher < 0){
+          return;
+        } else {
+          this.setState({
+            nowteacher: nowteacher
+          });
+        }
+      } else {
+        if (now > 0){
+          const nowstudent =  now - 1;
+          Meteor.call("UpdateNowStudent", studentId, nowstudent);
+          this.setState({
+            nowstudent: nowstudent
+          });  
+        }  
+      }
+    }
+
+    RightWeekClick () {
+      const studentId = this.state.studentId;
+      if (studentId === null){
+        const nowteacher = this.state.nowteacher + 1;
+        this.setState({
+          nowteacher: nowteacher
+        });
+      } else {
+        const nowstudent = this.state.nowstudent + 1;
+        Meteor.call("UpdateNowStudent", studentId, nowstudent);
+        this.setState({
+          nowstudent: nowstudent
+        });  
+      }
+    }
+    
+    studentClick (studentId) {
+      function filterStudentId(student){
+        if (student._id === studentId){
+          return true;
+        }
+        return false;
+      }
+      const students = this.props.students;
+      const filtredStudents=students.filter(filterStudentId);
+      const student = filtredStudents.shift();
+      const nowstudent = student.now
       this.setState({
-        owner: studentId
+        studentId: studentId,
+        nowstudent: nowstudent
       });
-      
-      
-    }
 
+    }
+    
     scheduleClick() {
       this.setState({
-        owner: Meteor.userId()
+        owner: Meteor.userId(),
+        studentId: null
       });   
       
     } 
@@ -46,18 +100,13 @@ class Teacher extends Component {
       ));
     }
 
-    renderScheduleTable() {
-      const owner = this.state.owner;
-      const week = this.state.week;
-      const now = this.state.now;
-      
+    renderScheduleTable(owner, time, nowteacher, nowstudent, studentId) {
       return (
-        <ScheduleTable owner={owner} week={week[now]} />
+        <ScheduleTable owner={owner} teacherweek={time[nowteacher]} studentweek={time[nowstudent]} studentId={studentId} />
       );
         
     }
 
-   
     addStudent(event) {
       event.preventDefault();
       const firstname = ReactDOM.findDOMNode(this.refs.firstname).value.trim();
@@ -72,8 +121,16 @@ class Teacher extends Component {
       }
     }
 
+    renderTime(studentId, time, nowstudent, nowteacher){
+      return (studentId !== null ? time[nowstudent] : time[nowteacher]);
+    }
+
     render(){
-      console.log(this.state.owner)
+      const owner = this.state.owner;
+      const time = this.state.time;
+      const nowstudent = this.state.nowstudent;
+      const nowteacher = this.state.nowteacher;
+      const studentId= this.state.studentId;
       return(
           <div>
             <div className="leftsider">
@@ -81,7 +138,7 @@ class Teacher extends Component {
                 <p><img src={"/../images/avatar.png"}/><AccountsUIWrapper/></p>
               </div>
                   <div className="new-student">
-                    <form className="studentsform" onSubmit={this.addStudent.bind(this)}>
+                    <form className="studentsform" onSubmit={this.addStudent}>
                           <input
                               type="text"
                               ref="firstname"
@@ -104,9 +161,14 @@ class Teacher extends Component {
                     </ol>
                   </div>
             </div>
-            {this.renderScheduleTable()}
-            <Time />
-            <RightSider/>
+            {this.renderScheduleTable(owner, time, nowteacher, nowstudent, studentId)}
+            <div className="Time">
+              <button className="LeftWeek" onClick={this.LeftWeekClick}>
+              </button>
+              <span className="time">2018 Week {this.renderTime(studentId, time, nowstudent, nowteacher)}  </span>
+              <button className="RightWeek" onClick={this.RightWeekClick}>
+              </button>
+            </div>
           </div>
       );
     }

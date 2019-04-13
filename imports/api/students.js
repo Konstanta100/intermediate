@@ -18,6 +18,7 @@ Students.schema = new SimpleSchema({
   nameteacher:{type: String},
   firstname: {type: String},
   number: {type: String},
+  now: {type: Number},
   createdAt:{
     type: Date,
     autoValue: function() {
@@ -41,8 +42,15 @@ Meteor.methods({
         firstname: firstname,
         number: number,
         teacherId: Meteor.userId(),
-        nameteacher: Meteor.user().username
+        nameteacher: Meteor.user().username,
+        now: 0
       });
+    },
+
+    UpdateNowStudent(studentId, nowstudent){
+      check(nowstudent, Number);
+      check(studentId, String);
+      Students.update(studentId, { $set: { now: nowstudent } });
     },
   })
 }

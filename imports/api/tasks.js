@@ -49,8 +49,17 @@ if (Meteor.isServer) {
         ownerId: owner,
         dayofweek: day,
         weekId: week
-
       });
     },
+
+    UpdateTaskList(taskId, studentId, studentweek){
+      Tasks.update(taskId, { $set: { ownerId: studentId, weekId: studentweek } });
+    },
+
+    DeleteTask(taskId){
+      Tasks.remove(taskId);
+    },
+
+
   })
 }

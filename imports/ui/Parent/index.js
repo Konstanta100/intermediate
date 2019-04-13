@@ -7,7 +7,7 @@ import { Students } from '../../api/students.js';
 
 import Student from '../Student/index.js';
 import ScheduleTable from './ScheduleTable.js';
-import Time from '../Time/index.js';
+
 import RightSider from './RightSider.js';
 
 
@@ -91,7 +91,7 @@ class Parent extends Component {
               </div>
 
             </div>
-            <Time />
+            
             <ScheduleTable />
             <RightSider/>
           </div>

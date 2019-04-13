@@ -21,8 +21,7 @@ body {
   width: 15%;
   background: white;
   border-left: 2px solid grey;
-  min-height: 1000px;
-  max-height: 1000px;
+  height: 1500px;
   margin-right: 0;
   float: right;
   padding: 20px 15px 15px 15px;
@@ -34,7 +33,7 @@ body {
   margin-left: 10%;
   margin-bottom: 950px;
   width: 75%;
-  padding:  20px 100px 15px 100px;
+  padding:  20px 30% 15px 30%;
   border-bottom: 2px solid grey;
 }
 
@@ -152,12 +151,15 @@ ol {
 
 .task{
   width:100%;
+  height: 130%;
   border-radius: 5px;
+  background: white;
   border: solid 1px dodgerblue;
 }
 
 .addTask{
   width:100%;
+  height: 38px;
   border-radius: 5px;
   border: solid 0.5px dodgerblue;
   background: #B1C8FD;
@@ -166,3 +168,28 @@ ol {
 .newtask {
   color: dodgerblue;;
 }
+
+
+.LeftWeek{
+  content: ''; 
+  position: relative; 
+  border: 20px solid transparent;
+  border-right: 20px solid blue;
+  background: dodgerblue;
+  margin-right: 20px;
+}
+
+.RightWeek{
+  content: ''; 
+  position: relative; 
+  border: 20px solid transparent;
+  border-left: 20px solid blue;
+  background: dodgerblue;
+  margin-left: 20px;
+}
+ 
+.time {
+  color: white;
+}
+
+ 
