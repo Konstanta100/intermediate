@@ -13,6 +13,49 @@ Tasks.schema= new SimpleSchema({
     type: String,
     regEx: SimpleSchema.RegEx.Id
   },
+  
+  lesson:{
+    type: String,
+    optional: true,
+    autoValue: function() {
+      const content = ''
+      if (this.isSet) {
+        return this.value;
+      }
+      return content;
+    },   
+  },
+
+  start:{
+    type: String,
+    optional: true,
+    autoValue: function() {
+      const content = ''
+      if (this.isSet) {
+        return this.value;
+      }
+      return content;
+    },   
+  },
+
+  finish:{
+    type: String,
+    optional: true,
+    autoValue: function() {
+      const content = ''
+      if (this.isSet) {
+        return this.value;
+      }
+      return content;
+    },   
+  },
+/*
+  image: {
+    type: String,
+    optional: true
+  },
+*/  
+
 
   authorId: {
     type: String,
@@ -51,6 +94,17 @@ if (Meteor.isServer) {
         weekId: week
       });
     },
+    copyScheduleTeacher(day, owner, week, lesson, start, finish){
+      Tasks.insert({
+        authorId: Meteor.userId(),
+        ownerId: owner,
+        dayofweek: day,
+        weekId: week,
+        lesson: lesson,
+        start: start,
+        finish: finish
+      });
+    },
 
     UpdateTaskList(taskId, studentId, studentweek){
       Tasks.update(taskId, { $set: { ownerId: studentId, weekId: studentweek } });
@@ -60,6 +114,9 @@ if (Meteor.isServer) {
       Tasks.remove(taskId);
     },
 
+    addTaskForInformation(taskId, lesson, start, finish){
+      Tasks.update(taskId, { $set: { lesson: lesson, start: start, finish: finish}});
+    },
 
   })
 }

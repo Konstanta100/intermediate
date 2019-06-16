@@ -3,9 +3,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 
 import { Students } from '../../api/students.js';
-
-
-import Student from '../Student/index.js';
 import ScheduleTable from './ScheduleTable.js';
 
 import RightSider from './RightSider.js';
@@ -23,20 +20,6 @@ class Parent extends Component {
             }],
             timelength: time.length,*/
         };
-
-    };
-
-    /*nextweek(week) {
-        this.setState({
-            timelength: week,
-
-        });
-
-    }*/
-    renderStudents() {
-      return this.props.students.map((student) => (
-        <Student key={student._id} student={student} />
-      ));
     };
 
 
@@ -84,11 +67,6 @@ class Parent extends Component {
                 </form>
               </div>
               <ScheduleEdit /* onClick={this.handleClick()} */ />
-              <div className="studentslist">
-                <ol>
-                  {this.renderStudents()}
-                </ol>
-              </div>
 
             </div>
             
