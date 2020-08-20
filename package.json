@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/runtime": "^7.1.5",
     "antd": "^3.16.3",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "indexof": "0.0.1",
     "meteor-node-stubs": "^0.4.1",
     "react": "^16.8.5",
